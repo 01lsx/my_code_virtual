@@ -1,6 +1,0 @@
-epoll_create();//创建监听红黑树
-epoll_ctl();//向树上添加监听fd
-epoll_wait();//监听
-//有客户端连接上来--->lfd调用acceptconn()--->将cfd挂载到红黑树上监听其读事件--->
-//epoll_wait()返回cfd --->cdf回调recvdata()--->将cfd摘下来监听写事件--->
-//epoll_wait()返回cdf---》cdf回调senddata()--->将cfd摘下来监听读事件--->...--->
