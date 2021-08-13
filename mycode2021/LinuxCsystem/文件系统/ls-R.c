@@ -6,7 +6,7 @@
 #include<dirent.h>
 #include<sys/stat.h>
 
-#define PATH_LEN 256
+#define PATH_LEN 46
 
 void fetchdir(const char *dir,void (*func)(char *)){ //该函数被调用，则已被判定为目录
     char name[PATH_LEN];
