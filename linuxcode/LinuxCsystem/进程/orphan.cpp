@@ -15,6 +15,7 @@ int main(int argc,char *argv[]){
     }else if(pid > 0){
             printf("i`m parent process pid = %d\n",pid);
             sleep(8);
+            printf("----parent going to die ----\n");
     }
     return 0;
 }
