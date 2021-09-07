@@ -10,9 +10,9 @@ int main(int argc,char *argv[]){
         perror("fork error");
         exit(1);
     }else if(pid == 0){
-        printf("---child:i`m going to sleep 5 seconds,pid = %d---",getpid());
+        printf("---child:i`m going to sleep 5 seconds,pid = %d---\n",getpid());
         sleep(5);
-        printf("---child going to die---");
+        printf("---child going to die---\n");
         return 66;
     }else if(pid > 0){
         wpid = wait(&status);
@@ -21,12 +21,12 @@ int main(int argc,char *argv[]){
             exit(1);
         }
         if(WIFEXITED(status)){
-            printf("child exit with %d",WEXITSTATUS(status));
+            printf("child exit with %d\n",WEXITSTATUS(status));
         }
         if(WIFSIGNALED(status)){
-            printf("child killed with signal %d",WTERMSIG(status));
+            printf("child killed with signal %d\n",WTERMSIG(status));
         }
-        printf("---parent going to die,wpid = %d",wpid);
+        printf("---parent going to die,wpid = %d\n",wpid);
     }
     return 0;
 }
