@@ -19,7 +19,7 @@ int main(int argc,char *argv[]){
             printf("i`m parent,before waitpid,pid = %d\n",tmpid);
             //sleep(5);
             //wpid = waitpid(tmpid,NULL,WNOHANG);
-            wpid = (tmpid,NULL,0);
+            wpid = waitpid(tmpid,NULL,0);
             if(wpid == -1){
                 perror("waitpid error");
                 exit(1);
