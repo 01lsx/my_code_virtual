@@ -9,7 +9,7 @@ void sys_err(const char *str){
 int main(int argc,char *argv[]){
     int fd[2],i,ret;
     pid_t pid;
-    char *str = "hello pipe",buf[1024];
+    char *str = "hello pipe\n",buf[1024];
     i = pipe(fd);
     if(i == -1){
         sys_err("pipe error");
