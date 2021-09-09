@@ -27,12 +27,13 @@ int main(int argc,char *argv[]){
     }
     if(i == 0){
         close(pipefd[0]);
-        write(pipefd[1],"1.hello\n",string("1.hello\n"));
+        write(pipefd[1],"1.hello\n",strlen("1.hello\n"));
     }else if(i == 1){
         close(pipefd[0]);
-        write(pipefd[1],"2.world\n",string("2.world\n"));
+        write(pipefd[1],"2.world\n",strlen("2.world\n"));
     }else{
         close(pipefd[1]);
+        sleep(1);
         n = read(pipefd[0],buf,1024);
         write(STDOUT_FILENO,buf,n);
         for(i=0;i<2;i++){
