@@ -18,6 +18,7 @@ int main(int argc,char *argv[]){
     int i = 0;
     while(1){
         sprintf(buf,"hello &d\n",i++);
+    //sprintf第一个参数为要写入的字符串，后面和Printf函数一样。
         write(fd,buf,strlen(buf));
         sleep(1);
     }
