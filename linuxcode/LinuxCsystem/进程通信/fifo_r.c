@@ -18,7 +18,7 @@ int main(int argc,char *argv[]){
     while(1){
         n = read(fd,buf,1024);
         write(STDOUT_FILENO,buf,n);
-        sleep(3);
+        sleep(1);
     }
     close(fd);
     return 0;
