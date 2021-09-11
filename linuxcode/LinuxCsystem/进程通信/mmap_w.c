@@ -14,6 +14,7 @@ void sys_err(const char *str){
     perror(str);
     exit(1);
 }
+
 int main(int argc,char *argv[]){
     STU stu = {1,"xiaoming"};
     int fd = open("mmapfile",O_RDWR|O_CREAT|O_TRUNC,0664);

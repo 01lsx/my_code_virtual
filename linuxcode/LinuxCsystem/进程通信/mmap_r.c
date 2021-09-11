@@ -13,6 +13,7 @@ void sys_err(const char *str){
     perror(str);
     exit(1);
 }
+
 int main(int argc,char *argv[]){
     STU s = {1,"xiaoming"};
     int fd = open("mmapfile",O_RDONLY);

@@ -31,7 +31,8 @@ int main(int argc,char *argv[]){
     }
     strcpy(p,"hello mmap");
     printf("%s",p);
-    int ret = munmap(NULL,len); //类似malloc函数，mmap建立的映射区在使用结束后也应该调用类似free的函数来释放。
+    int ret = munmap(NULL,len);
+    //类似malloc函数，mmap建立的映射区在使用结束后也应该调用类似free的函数来释放。
     if(ret == -1){
         sys_err("munmap error");
     }
