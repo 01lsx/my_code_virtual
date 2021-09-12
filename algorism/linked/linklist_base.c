@@ -162,9 +162,32 @@ void purify_linklist(Linklist head){
         }
 }
 
+void difference(Linklist Ha,Linklist Hb){
+    Lnode *pre,*p,*r,*q;
+    pre = Ha;
+    p=Ha->next;
+    while(p!=NULL){
+        q=Hb->next;
+        while(q!=NULL&&q->data!=p->data)
+            q=q->next;
+        if(q!=NULL){
+            r = p;
+            pre->next = p->next;
+            p=p->next;
+            free(r);
+        }
+        else{
+            pre = p;
+            p=p->next;
+        }
+    }
+}
+
 int main(int argc,char *argv[]){
     int i=1,j=1,x,n,o;
+    printf("creating first linklist:\n");
     Linklist head = create_linklist_head();
+    printf("creat linklist1 is finished\n");
     Lnode *p = head->next;
     int number = length_linklist(head);
     printf("linklist length is %d\n",number);
@@ -236,6 +259,14 @@ int main(int argc,char *argv[]){
     printf("the changing linklist length is %d\n",number);
     */
 
+    //两个集合的差集
+  /*printf("creating second linklist:\n");
+    Linklist head1 = create_linklist_head();
+    printf("creat linklist2 is finished\n");
+    int number1 = length_linklist(head1);
+    printf("linklist length is %d\n",number);
+    difference(head,head1);*/
+    
     //查看各结点数据
     while(p != NULL){
         printf(" node %dth`s data is %d\n",i++,p->data);
