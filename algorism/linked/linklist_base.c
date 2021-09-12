@@ -4,11 +4,17 @@
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
+#include<unistd.h>
 
 typedef struct Node{
     int         data;
     struct Node *next;
 }Lnode,*Linklist;
+
+void sys_err(const char *str){
+    perror(str);
+    exit(1);
+}
 
 Linklist create_linklist_head(){
     int      x;
@@ -45,7 +51,6 @@ Linklist create_linklist_tail(){
     return 0;
 }
 
-
 int length_linklist(Linklist head){
     Lnode *p = head;
     int    j = 0;
@@ -53,10 +58,10 @@ int length_linklist(Linklist head){
         p=p->next;
         j++;
     }
-    return p;
+    return j;
 }
 
-Linklist get_linklist_number(Linklist head,int i){
+Lnode *get_linklist_number(Linklist head,int i){
     Lnode *p = head;
     int    j = 0;
     while(p != NULL&&j < i){//查找序号需要提前判断下一个节点是否为空
@@ -66,29 +71,32 @@ Linklist get_linklist_number(Linklist head,int i){
     return p;//找到了返回结点，未找到返回NULL
 }
 
-Linklist get_linklist_data(Linklist head,int x){
+Lnode *get_linklist_data(Linklist head,int x){
     Lnode *p = head->next;
-    if(p != NULL&&p->data != x){
+    while(p != NULL&&p->data != x){
         p = p->next;
     }
     return p;
 }
 
-int add_linklist_back(Linklist head,int i){
+int insert_linklist_back(Linklist head,int i){
+     int x;
      Lnode *p = get_linklist_number(head,i-1),*s;
      if(p == NULL){ //如果i-1个节点不存在，则不能插入，第i个节点可以不存在。
-         perror("add error");
+         printf("these place can`t insert node");
+         return -1;
      }else{
          s = (Lnode*)malloc(sizeof(Lnode));
-         int x;
+         printf("请输入要插入结点的数据：");
+         scanf("%d",&x);
          s->data = x;
          s->next = p->next;
-         p->next = s;
-         return 0; 
+         p->next = s; 
      }
+     return 0;
 }
 
-int add_linklist_front(Linklist head,int i){
+int insert_linklist_front(Linklist head,int i){
     int x;
     Lnode *p = get_linklist_number(head,i),*q,*s;
     if(p == NULL){
@@ -121,7 +129,7 @@ int delete_linklist(Linklist head,int i){
     q = p->next;
     p->next = q->next;
     free(q);
-    return 0;
+    return 0;    
 }
 
 void backformation_linklist(Linklist head){
@@ -134,4 +142,105 @@ void backformation_linklist(Linklist head){
         q->next = head->next;
         head->next = q;
     }
+}
+
+void purify_linklist(Linklist head){
+    Lnode *p,*q,*r;
+    p = head->next;
+    if(p!=NULL)
+        while(p->next){//p的指针域不指向NULL，即未到链表尾
+            q = p;
+            while(q->next){//q的指针不指向NULL，即未到链表尾
+                if(q->next->data == p->data){
+                    r = q->next;
+                    q->next = r->next;
+                    free(r);
+                }
+                else q=q->next;
+            }
+            p = p->next;
+        }
+}
+
+int main(int argc,char *argv[]){
+    int i=1,j=1,x,n,o;
+    Linklist head = create_linklist_head();
+    Lnode *p = head->next;
+    int number = length_linklist(head);
+    printf("linklist length is %d\n",number);
+    
+    //查询某个结点的数据
+  /*Lnode *test,*find = head;
+    printf("请选择想要查询的方式：\n");
+    printf("根据序号查数据请按<1>\n");
+    printf("根据数据查序号请按<2>\n");
+    scanf("%d",&n);
+    switch(n){
+        case 1:
+        printf("请输入要查询的结点号：");
+        scanf("%d",&i);
+        test = get_linklist_number(head,i);
+        if(test == NULL){
+            printf("the find number is error\n");
+            return -1;
+        }
+        printf("the %d node`s data is %d\n",i,test->data);  break;
+        case 2:
+        printf("请输入要查询的数据：");
+        scanf("%d",&x);
+        test = get_linklist_data(head,x);
+        if(test == NULL){
+            printf("the finding data is error");
+            return -1;
+        }
+        printf("finding the data %d `s nodenumber finish\n",test->data);
+        while(find->next){
+              if(find->next == test){
+                  break;
+              }
+              else{find = find->next; j++;}
+        }
+        printf("the data %d`s node is %dth",test->data,j); break;
+    }*/
+
+    //插入结点
+  /*printf("请输入想要插入的结点序号：");
+    scanf("%d",&i);
+    o = insert_linklist_back(head,i);
+    if(o == -1){
+        sys_err("insert error");
+    }*/
+    
+    //删除结点
+  /*printf("请输入要删除的结点数：");
+    scanf("%d",&x);
+    o = delete_linklist(head,x);
+    if(o == -1){
+        printf("the node you will delete is error\n");
+        return -1;
+    }*/
+
+     //链表数据逆置 
+  /*backformation_linklist(head);
+    printf("%d\n",p->data);
+    p=head->next;//一开始p指向了第一个结点，逆置后指向最后一个结点。    
+    */
+
+    //删除重复结点
+    /*printf("删除重复结点中...\n");
+    purify_linklist(head);
+    printf("删除重复结点成功！\n");
+    //p=head->next;
+    
+    number = length_linklist(head);
+    printf("the changing linklist length is %d\n",number);
+    */
+
+    //查看各结点数据
+    while(p != NULL){
+        printf(" node %dth`s data is %d\n",i++,p->data);
+        p = p->next;
+    }
+    sleep(1);
+    return 0;
 }
