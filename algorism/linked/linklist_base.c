@@ -24,7 +24,7 @@ Linklist create_linklist_head(){
     scanf("%d",&x);
     while(x != -1){
         p = (Lnode *)malloc(sizeof(Lnode));
-        p->next = head ->next;
+        p->next = head->next;
         head->next = p;
         p->data = x;
         scanf("%d",&x);
@@ -64,10 +64,10 @@ int length_linklist(Linklist head){
 Lnode *get_linklist_number(Linklist head,int i){
     Lnode *p = head;
     int    j = 0;
-    while(p != NULL&&j < i){//查找序号需要提前判断下一个节点是否为空
+    while(p->next != NULL&&j < i){//查找序号需要提前判断下一个节点是否为空
         p = p->next;
         j++;
-    }
+    }//如果j=i说明找到了结点，返回p，p对应想找的结点。如果i大于链表的长度，那么p会编程NULL，返回P即可。
     return p;//找到了返回结点，未找到返回NULL
 }
 
@@ -164,7 +164,7 @@ void purify_linklist(Linklist head){
 
 void difference(Linklist Ha,Linklist Hb){
     Lnode *pre,*p,*r,*q;
-    pre = Ha;
+    pre = Ha;//
     p=Ha->next;
     while(p!=NULL){
         q=Hb->next;
@@ -175,10 +175,9 @@ void difference(Linklist Ha,Linklist Hb){
             pre->next = p->next;
             p=p->next;
             free(r);
-        }
-        else{
+        }else{
             pre = p;
-            p=p->next;
+            p=p->next;//让pre始终跟在p的前面，因为如果需要删除需要目标节点的前一个结点。
         }
     }
 }
@@ -189,8 +188,8 @@ int main(int argc,char *argv[]){
     Linklist head = create_linklist_head();
     printf("creat linklist1 is finished\n");
     Lnode *p = head->next;
-    int number = length_linklist(head);
-    printf("linklist length is %d\n",number);
+    int number1 = length_linklist(head);
+    printf("linklist length is %d\n",number1);
     
     //查询某个结点的数据
   /*Lnode *test,*find = head;
@@ -235,7 +234,7 @@ int main(int argc,char *argv[]){
     }*/
     
     //删除结点
-  /*printf("请输入要删除的结点数：");
+  /*printf("请输入要删除的结点序号：");
     scanf("%d",&x);
     o = delete_linklist(head,x);
     if(o == -1){
@@ -243,9 +242,11 @@ int main(int argc,char *argv[]){
         return -1;
     }*/
 
+    //插入操作需要目标结点前的结点存在，删除结点需要目标结点前和目标节点同时存在
+
      //链表数据逆置 
   /*backformation_linklist(head);
-    printf("%d\n",p->data);
+    //printf("%d\n",p->data);
     p=head->next;//一开始p指向了第一个结点，逆置后指向最后一个结点。    
     */
 
@@ -253,10 +254,8 @@ int main(int argc,char *argv[]){
     /*printf("删除重复结点中...\n");
     purify_linklist(head);
     printf("删除重复结点成功！\n");
-    //p=head->next;
-    
-    number = length_linklist(head);
-    printf("the changing linklist length is %d\n",number);
+    number2 = length_linklist(head);
+    printf("the changing linklist length is %d\n",number2);
     */
 
     //两个集合的差集
@@ -277,14 +276,16 @@ int main(int argc,char *argv[]){
 }
 
 /*单循环链表
+单链表的尾指针指向链表的头结点
 RA为链表1的尾结点，RB为链表2的尾结点,将两单循环链表合并
 p = RA->next;
 RA->next = RB->next->next;
 free(RB->next);
-RB->next = p;//循环链表首尾相连。
+RB->next = p;//循环链表首尾相连
 */
 
-/*双向链表
+//双向链表
+/*
 在单链表中，如果想要找某个结点的前驱，必须从头节点开始遍历，直到找到一个节点的指针域指向当前节点，这个结点就是我们要找的
 双向循环链表
 空表的头指针指向头节点，前指针域prior指向后指针域next,后指针域next指向前指针域prior
@@ -310,4 +311,15 @@ p->prior = s;
 p->prior->next = p->next;
 p->next->prior = p->prior;
 free(p);
+*/
+
+//静态链表
+/*
+typedef struct{
+    Datatype data;
+    int next;
+}Snode;
+Snode sd[maxsize];
+int SL;
+这里的next表示下标，称为静态指针，静态指针也叫“游标”，也就是用游标来模拟指针。
 */
