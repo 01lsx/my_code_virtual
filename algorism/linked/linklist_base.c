@@ -275,3 +275,39 @@ int main(int argc,char *argv[]){
     sleep(1);
     return 0;
 }
+
+/*单循环链表
+RA为链表1的尾结点，RB为链表2的尾结点,将两单循环链表合并
+p = RA->next;
+RA->next = RB->next->next;
+free(RB->next);
+RB->next = p;//循环链表首尾相连。
+*/
+
+/*双向链表
+在单链表中，如果想要找某个结点的前驱，必须从头节点开始遍历，直到找到一个节点的指针域指向当前节点，这个结点就是我们要找的
+双向循环链表
+空表的头指针指向头节点，前指针域prior指向后指针域next,后指针域next指向前指针域prior
+非空表的头指针指向头结点，头结点的前指针域prior指向尾结点数据，尾节点的后指针域next指向头节点。
+
+双向链表的定义：
+typedef struct ldnode{
+    datatype data;
+    struct ldnode *prior,*next;
+}DLNode,*DLinklist;
+双向链表中的结点有如下关系：
+p->prior->next = p;
+p = p->next->prior;
+也就是说通过当前已知结点可以找到前驱结点和后继结点，根据这些基础可以推导双向链表的插入和删除
+
+在指定结点p前插入结点s//先处理p之前的结点，再处理p，因为前面的结点是通过p找到的。
+s->prior = p->prior;
+p->prior->next = s ;
+s->next = p;
+p->prior = s;
+
+删除指定的结点p
+p->prior->next = p->next;
+p->next->prior = p->prior;
+free(p);
+*/
