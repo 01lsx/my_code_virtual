@@ -7,7 +7,8 @@ typedef struct cyclenode{
     int password;
     struct cyclenode *next;
 }Lnode,*Linklist;
- 
+
+//为什么这个函数的出现会有一大堆的问题？🤔
 /*void create_information(int &id,int &ipasswd,int i){
      printf("请输入第%d个结点的id:",i+1);
     scanf("%d",&id);
@@ -129,7 +130,9 @@ int main(){
             printf("empty linklist can`t operating delete!\n");
             exit(1);
         }
-        head = NULL;
+        if(remain == 0){
+            head = NULL;
+        }
         printf("the single cycle`s length is %d\n\n",remain);
 
         ch = getchar(); ch = getchar();
