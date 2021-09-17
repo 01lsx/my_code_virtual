@@ -1,11 +1,12 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<unistd.h>
+#include<time.h>
 
 typedef struct cyclenode{
     int id;
     int password;
-    struct cyclenode *next;
+    struct cyclenode *next,*front;
 }Lnode,*Linklist;
 
 //为什么这个函数的出现会有一大堆的问题？🤔
@@ -13,19 +14,23 @@ typedef struct cyclenode{
      printf("请输入第%d个结点的id:",i+1);
     scanf("%d",&id);
     if(id != -1){
-    printf("请输入第%d个结点的password:",i+1);
-    scanf("%d",&ipasswd);
+    //printf("请输入第%d个结点的password:",i+1);
+    //scanf("%d",&ipasswd);
+    ipasswd = rand()%10+1;
 }*/
 
 int create_cycle_linklist(Linklist *c_head){
+    srand(time(NULL));
     Lnode *newnode,*point;
     int i=0,id=0,ipasswd=0;
     printf("please attention:if id number = -1,stop create\n");
     printf("please input %dth node id:",i+1);
     scanf("%d",&id);
     if(id != -1){
-    printf("please input %dth node password:",i+1);
-    scanf("%d",&ipasswd);
+    //printf("please input %dth node password:",i+1);
+    //scanf("%d",&ipasswd);
+    ipasswd = rand()%10+1;
+    printf("the %dth id`s password is %d\n",i+1,ipasswd);
     }
     while(id != -1){
         newnode = (Lnode*)malloc(sizeof(Lnode));
@@ -37,14 +42,16 @@ int create_cycle_linklist(Linklist *c_head){
         }else{
             point->next = newnode;
             point = point->next;
-            point ->next = *c_head;//相当于是尾插法最后让尾指针指向头结点
+            point ->next = *c_head;  //相当于是尾插法最后让尾指针指向头结点
         }
         i++;
         printf("please input %dth node id:",i+1);
         scanf("%d",&id);
         if(id != -1){
-        printf("please input %dth node password:",i+1);
-        scanf("%d",&ipasswd);
+        //printf("please input %dth node password:",i+1);
+        //scanf("%d",&ipasswd);
+        ipasswd = rand()%10+1;
+        printf("the %dth id`s password is %d\n",i+1,ipasswd);
         }
     }
     return i;
@@ -69,14 +76,28 @@ int show_cycle_linklist(Linklist head){
     return i;
 }
 
-int running_killnode_dextro(Linklist *head,int fpswd,int length){
+int running_killnode_dextro(Linklist *head,int length){
     Lnode *pre,*point,*rm;
-    int tempasswd = fpswd,n = 1;
+    char ch;
+    int tempasswd = 1,n = 1;
     point = pre = *head;
+    printf("the linklist`s length is %d\n",length);
+    while(1){
+        printf("please select the first one(smaller than length):");
+        scanf("%d",&tempasswd);
+        if(tempasswd > length||tempasswd < 1){
+            printf("the first one select error,please select again\n");
+        }else{
+            printf("please press anykeys to continue\n");
+            ch = getchar();
+            system("reset");
+            break;    
+        }
+    }
     while(length != 0){
     for(int i = 1;i < tempasswd;i++){
-        point = point->next;
-    }  
+        point = point ->next;
+    }
     while(pre->next != point){
         pre=pre->next;
     }
@@ -112,6 +133,7 @@ int main(){
         length = create_cycle_linklist(&head);
         printf("the create_cycle_linklist  is over\n");
         printf("the linklist`s length is %d\n",length);
+        printf("please press anykeys to exit\n");
         ch = getchar();
         break;
 
@@ -121,21 +143,28 @@ int main(){
         i = show_cycle_linklist(head);
         printf("---------------------------------\n ");
         printf(" the information perform is over\n");
+        printf("please press anykeys to exit\n");
         ch = getchar(); ch = getchar();//为什么需要两个才能达到效果🤔
         break;
         
         case 3:
-        remain = running_killnode_dextro(&head,fpswd,length);
-        if(remain != 0){
+        if(head == NULL){
             printf("empty linklist can`t operating delete!\n");
+            printf("please press anykeys to exit\n");
+            ch = getchar(); ch = getchar();
+            break;
+        }
+        remain = running_killnode_dextro(&head,length);
+        if(remain != 0){
+            printf("running_killnode_dextro is error\n");
             exit(1);
         }
         if(remain == 0){
             head = NULL;
         }
         printf("the single cycle`s length is %d\n\n",remain);
-
-        ch = getchar(); ch = getchar();
+        printf("please press anykeys to exit\n");
+        ch = getchar();
         break;
 
         case 0: printf("----sign out\n\n\n"); 
