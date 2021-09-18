@@ -191,6 +191,7 @@ int main(int argc,char *argv[]){
     int number1 = length_linklist(head);
     printf("linklist length is %d\n",number1);
     
+    
     //查询某个结点的数据
   /*Lnode *test,*find = head;
     printf("请选择想要查询的方式：\n");
