@@ -7,8 +7,7 @@ int main(int argc,char *argv[]){
     if(pid == -1){
         perror("fork error");
         exit(1);
-    }
-    else if(pid == 0){
+    }else if(pid == 0){
     sleep(5);
     printf("this is child,pid = %d,ppid = %d\n",getpid(),getppid());
     int ret = kill(getppid(),SIGKILL);

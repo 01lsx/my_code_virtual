@@ -33,7 +33,7 @@ void create_cycle_linklist(Linklist *c_head,int *quantity){
         front->prior = point;//
        //*c_head->prior = point; //为什么这个是不可行的是🤔
         }else{
-            point = front = *c_head;
+            point = front = *c_head;//这里为了第二次进行追加结点
             while(point->next != *c_head){
                 point = point->next;
             }

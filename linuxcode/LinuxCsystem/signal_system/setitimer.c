@@ -1,14 +1,14 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include<sys/time.h>
+#include<sys/time.h>//setitimer函数的头文件
 #include<signal.h>
 void myfunc(int signo)
 {
-    printf("hello world!");
+    printf("hello world!\n");
 }
 int main(void){
-    struct itimerval it,oldit;
     signal(SIGALRM,myfunc);
+    struct itimerval it,oldit;
     it.it_interval.tv_sec = 5;
     it.it_interval.tv_usec = 0;
     it.it_value.tv_sec = 2;
@@ -18,5 +18,6 @@ int main(void){
         perror("setitimer error");
         return -1;
     }
+    while(1);
     return 0;
 }
