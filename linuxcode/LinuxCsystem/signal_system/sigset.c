@@ -5,6 +5,8 @@
 void printset(sigset_t *set);
 void system_err(char *str);
 int main(int argc,char *argv[]){
+    char a[] = "sigprocmask error";
+    char b[] = "sigpending error";
     sigset_t set,odset,pding;
     sigemptyset(&set);
     sigaddset(&set,SIGINT);
@@ -12,10 +14,10 @@ int main(int argc,char *argv[]){
     sigaddset(&set,SIGBUS);
     sigaddset(&set,SIGQUIT);
     int ret1 = sigprocmask(SIG_BLOCK,&set,&odset);
-    if(ret1 == -1) system_err("sigprocmask error");
+    if(ret1 == -1) system_err(a);
     while(1){
     int ret2 = sigpending(&pding);
-    if(ret2 == -1) system_err("sigoending error");
+    if(ret2 == -1) system_err(b);
     printset(&pding);
     sleep(1);
     }
