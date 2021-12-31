@@ -22,13 +22,13 @@ typedef struct MGraph
     int arc[50][50];        //存放两点之间权值的邻接矩阵
     int v,e;                //定点数和边数
 } MGraph;
- 
+
 MGraph* CreateGraph()
 {
     MGraph *G;
 	int i,j,k;
 	G=(MGraph*)malloc(sizeof(MGraph));
- 
+
     //初始化访问标志
 	for(i=0;i<10;i++){
     G->vexs[i].park=0;
