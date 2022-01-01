@@ -8,6 +8,8 @@ void add(int *a){
 int main(){
     int a[2] = {0,0};
     add(a);
-    printf("%d",a[0]);
+    for(int i = 0;i < 2;++i){
+        printf("%d",a[i]);
+    }
 
 }
