@@ -91,16 +91,16 @@ void RudeGraph(MGraph *G,int b,int w,int k,int sum){
      
         if(b==w) {
                     for(p=0;p<k;p++){
-                        printf("%d->",G->a[p]);
-                    }
+                    printf("%d->",G->a[p]);}
+                    
                     printf("%d  ",G->a[k]);
                     printf("路线总长：%dkm\n",sum);
                     if(sum<G->minrude){
                         G->r=k;
                         G->minrude=sum;
                         for(p=0;p<=k;p++){
-                            G->min[p]=G->a[p];
-                        }
+                        G->min[p]=G->a[p];}
+                        
                     }
                     return ;
                 }
