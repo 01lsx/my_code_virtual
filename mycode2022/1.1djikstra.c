@@ -25,7 +25,7 @@ Mgraph* Create_Mgraph(){
         INFINITY,INFINITY,7,INFINITY,3,0,INFINITY,5,INFINITY,
         INFINITY,INFINITY,INFINITY,3,6,INFINITY,0,2,7,
         INFINITY,INFINITY,INFINITY,INFINITY,9,5,2,0,4,
-        INFINITY,INFINITY,INFINITY,INFINITY,INFINITY,7,4,0
+        INFINITY,INFINITY,INFINITY,INFINITY,INFINITY,INFINITY,7,4,0
     };
     for(i = 0;i < MAX;i++){
              for(j = 0;j < MAX;j++){
@@ -83,8 +83,7 @@ int main(){
             for(int j = 0;j < MAX;j++){
             printf("%d \t",G.length[i][j]);
         }   printf("\n");
-    }
-    printf("\n\n");
+    }       printf("\n\n");
     ShortestPath_djikstra(G,0,P,D);
         for(int i = 0;i < MAX;i++){
         printf("%d \t",i);
@@ -96,3 +95,4 @@ int main(){
         printf("%d \t",D[i]);
     }   printf("\n");
 }
+

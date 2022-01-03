@@ -98,7 +98,7 @@ void DFS1(Mgraph G,int i){
     visited[i] = TRUE;
     printf("%c ",G.vexs[i]);
     for(j = 0;j < G.numVertexes;j++){
-       if(G.arc[i][j] == 1 && !visited[j])
+        if(G.arc[i][j] == 1 && !visited[j])
         DFS1(G,j);
     }
 }
@@ -112,9 +112,9 @@ void BFSTraverse1(Mgraph G){
             printf("%c ",G.vexs[i]);
             EnQueue(&Q,i); //入队
             while(!QueueEmpty(Q)){
-                DeQueue(&Q,&i); //将队列中的元素取出，赋值给i
-                for(j = 0;j < G.numVertexes;j++){
-                    if(G.arc[i][j] == 1 && !visited[j]){
+                        DeQueue(&Q,&i); //将队列中的元素取出，赋值给i
+                        for(j = 0;j < G.numVertexes;j++){
+                        if(G.arc[i][j] == 1 && !visited[j]){
                         visited[j] = TRUE;
                         printf("%c ",G.vexs[j]);
                         EnQueue(&Q,j); //入队

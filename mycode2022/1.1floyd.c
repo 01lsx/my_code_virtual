@@ -25,7 +25,7 @@ Mgraph* Create_Mgraph(){
         INFINITY,INFINITY,7,INFINITY,3,0,INFINITY,5,INFINITY,
         INFINITY,INFINITY,INFINITY,3,6,INFINITY,0,2,7,
         INFINITY,INFINITY,INFINITY,INFINITY,9,5,2,0,4,
-        INFINITY,INFINITY,INFINITY,INFINITY,INFINITY,7,4,0
+        INFINITY,INFINITY,INFINITY,INFINITY,INFINITY,INFINITY,7,4,0
     };
     for(i = 0;i < MAX;i++){
         for(j = 0;j < MAX;j++){
@@ -44,7 +44,7 @@ Mgraph* Create_Mgraph(){
         strcpy(G->vex[8].name,"v8");
 
         G->numVertex = MAX;
-
+        return G;
 }
 
 void ShortestPath_Floyd(Mgraph G,int P[][MAX],int D[][MAX]){
@@ -58,8 +58,8 @@ void ShortestPath_Floyd(Mgraph G,int P[][MAX],int D[][MAX]){
                     for(k = 0;k < MAX;k++){
                     for(v = 0;v < MAX;v++){
                     for(w = 0;w < MAX;w++){
-                    if(D[v][w] > D[v][k] + D[k][w]){
-                    D[v][w] = D[v][k] + D[k][w];
+                    if(D[v][w] > D[v][k] + D[k][w]){        //点v和点w连通，v和w都与k连通，且v-k-w < v-w
+                    D[v][w] = D[v][k] + D[k][w];            
                     P[v][w] = P[v][k];
                 }
             }
@@ -85,10 +85,22 @@ int main(){
     Mgraph *G;
     G = (Mgraph *)malloc(sizeof(Mgraph));
     G = Create_Mgraph();
-            for(int i = 0;i < G->numVertex;i++){
-            for(int j = 0;j < G->numVertex;j++){
-            printf("%d \t",G->length[i][j]);
-        }   printf("\n");
-    }
+    //         for(int i = 0;i < G->numVertex;i++){
+    //         for(int j = 0;j < G->numVertex;j++){
+    //         printf("%d \t",G->length[i][j]);
+    //     }   printf("\n");
+    // }
     ShortestPath_Floyd(*G,Path,Weight);
+    printf("P矩阵\n");
+    for(int i = 0;i < G->numVertex;i++){
+            for(int j = 0;j < G->numVertex;j++){
+            printf("%d \t",Path[i][j]);
+        }   printf("\n");
+    }       printf("\n");
+    printf("D矩阵\n");
+    for(int i = 0;i < G->numVertex;i++){
+            for(int j = 0;j < G->numVertex;j++){
+            printf("%d \t",Weight[i][j]);
+        }   printf("\n");
+    }       printf("\n");
 }
