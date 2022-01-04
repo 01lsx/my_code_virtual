@@ -50,25 +50,25 @@ Mgraph* Create_Mgraph(){
 void ShortestPath_djikstra(Mgraph G,int v0,int *P,int *D){
     int i,w,k,min;
     int final[MAX];
-    for(i = 0;i < G.numVertex;i++){                 // 初始化
+        for(i = 0;i < G.numVertex;i++){                             // 初始化
         final[i] = 0;
         P[i] = 0;
         D[i] = G.length[0][i];
     }
-    final[v0] = 1;
-    for(i = 1;i < G.numVertex;i++){
+        final[v0] = 1;
+            for(i = 1;i < G.numVertex;i++){
             min = INFINITY;
-            for(w = 0;w < G.numVertex;w++){
+            for(w = 0;w < G.numVertex;w++){                         // 寻找与当前节点连接的最短边
             if(!final[w] && D[w] < min){
             k = w;
             min = D[w];
-            }
         }
-    final[k] = 1;
-    for(w = 0;w < G.numVertex;w++){
+    }
+                final[k] = 1;
+                for(w = 0;w < G.numVertex;w++){
                 if(!final[w] && (min + G.length[k][w]) < D[w]){
                 D[w] = min + G.length[k][w];
-                P[w] = k;
+                P[w] = k;                                           //前驱节点
             }
         }
     }
@@ -79,12 +79,12 @@ int main(){
     int D[MAX];
     Mgraph G;
     G = *Create_Mgraph();
-            for(int i = 0;i < MAX;i++){                  //打印邻接矩阵
+            for(int i = 0;i < MAX;i++){                             //打印邻接矩阵
             for(int j = 0;j < MAX;j++){
             printf("%d \t",G.length[i][j]);
         }   printf("\n");
     }       printf("\n\n");
-    ShortestPath_djikstra(G,0,P,D);
+        ShortestPath_djikstra(G,0,P,D);
         for(int i = 0;i < MAX;i++){
         printf("%d \t",i);
     }   printf("\n");

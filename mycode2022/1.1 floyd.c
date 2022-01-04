@@ -49,7 +49,7 @@ Mgraph* Create_Mgraph(){
 
 void ShortestPath_Floyd(Mgraph G,int P[][MAX],int D[][MAX]){
     int k,v,w;
-            for(v = 0;v < MAX;v++){
+            for(v = 0;v < MAX;v++){                         //初始化
             for(w = 0;w < MAX;w++){
             D[v][w] = G.length[v][w];
             P[v][w] = w;
