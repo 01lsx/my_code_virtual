@@ -9,14 +9,14 @@ typedef int Status;
     QElemType data[MAX]; 
     int front;
     int rear;
-}SqQueue;
+}SqQueue;                                           //循环队列
     typedef struct QNode{
     QElemType data;
     struct QNode *next;
-}QNode,*QueuePtr;
+}QNode,*QueuePtr;                                   //链队列节点
     typedef struct{
         QueuePtr front,rear;
-}LinkQueue;
+}LinkQueue;                                         //链队列头指针
 
 Status InitQueue(SqQueue *Q){
     Q->front = 0;
@@ -36,7 +36,6 @@ Status EnQueue(SqQueue *Q,QElemType e){
 
     return OK;
 }
-
 Status DeQueue(SqQueue *Q,QElemType *e){
     if(Q->front == Q->rear)
     return ERROR;
@@ -45,6 +44,7 @@ Status DeQueue(SqQueue *Q,QElemType *e){
 
     return OK;
 }
+
 Status EnQueue(LinkQueue *Q,QElemType e){
     QueuePtr p = (QueuePtr)malloc(sizeof(QNode));
         if(p){
